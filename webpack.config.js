@@ -1,6 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { ProvidePlugin} =require('webpack')
+const { ProvidePlugin } = require("webpack");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+
 module.exports = {
   cache: false,
   mode: "development",
@@ -15,13 +17,21 @@ module.exports = {
       template: "public/index.html",
     }),
     new ProvidePlugin({
-      React: 'react',
-      process: 'process/browser',
-  })
+      React: "react",
+      process: "process/browser",
+    }),
   ],
-  entry: "./src/index.jsx",
+  entry: "./src/index.tsx",
   resolve: {
-    extensions: [".jsx", ".js", ".json"],
+    extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
+    plugins: [
+      new TsconfigPathsPlugin({
+        configFile: "tsconfig.json",
+        logLevel: "INFO",
+        extensions: [".ts", ".tsx", ".js"],
+        mainFields: ["browser", "main"],
+      }),
+    ],
   },
   devtool: "inline-source-map",
   output: {
@@ -51,7 +61,16 @@ module.exports = {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/, // to import images and fonts
         loader: "url-loader",
         options: { limit: false },
-      }
+      },
+      {
+        test: /\.(ts|tsx)?$/,
+        loader: "esbuild-loader",
+        exclude: /node_modules/,
+        options: {
+          loader: "tsx",
+          target: "es6",
+        },
+      },
     ],
   },
 };
