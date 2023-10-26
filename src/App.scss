@@ -6,3 +6,42 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+main {
+  padding: 5px;
+}
+
+.logo-container {
+  flex-grow: 1;
+}
+
+.link-container {
+  flex-grow: 2;
+  display: flex;
+  justify-content: space-between;
+  a {
+    margin: 0px 10px;
+    color: #fff;
+    transition: color 0.2s ease-in;
+    &:hover {
+      color: #e76712;
+    }
+  }
+}
+
+.navigator-main-container {
+  border: 1px soild #ccc;
+  box-shadow: 0px 2px 8px ;
+}
+
+.footer-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+}

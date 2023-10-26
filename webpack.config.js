@@ -6,6 +6,7 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 module.exports = {
   cache: false,
   mode: "development",
+  devtool: "source-map",
   devServer: {
     port: 3005,
     historyApiFallback: {
@@ -33,7 +34,6 @@ module.exports = {
       }),
     ],
   },
-  devtool: "inline-source-map",
   output: {
     path: path.join(__dirname, "/dist"), // the bundle output path
     filename: "bundle.js", // the name of the bundle
